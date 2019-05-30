@@ -49,6 +49,11 @@ class NumberStack {
         stack = numberStackHistory.getCurrentStack()
     }
 
+    fun loadFuture() {
+        numberStackHistory.recoverFuture()
+        stack = numberStackHistory.getCurrentStack()
+    }
+
     class NumberStackHistory {
 
         private val numberStackList = ArrayList<List<NumberNode>>()
@@ -68,6 +73,12 @@ class NumberStack {
         fun revocerPrevious() {
             if (currentVersionPosition > 0) {
                 currentVersionPosition--
+            }
+        }
+
+        fun recoverFuture() {
+            if (currentVersionPosition < numberStackList.size - 1) {
+                currentVersionPosition++
             }
         }
 

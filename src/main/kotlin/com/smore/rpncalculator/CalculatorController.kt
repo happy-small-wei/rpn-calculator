@@ -46,7 +46,7 @@ class CalculatorController {
         if (isNumeric(command)) {
             numberStack.pushNumber(command)
         } else {
-            commandMapping.getOrDefault(command, DefaultCommand()).operate(numberStack)
+            commandMapping.getOrDefault(command.toLowerCase(), DefaultCommand()).operate(numberStack)
         }
     }
 

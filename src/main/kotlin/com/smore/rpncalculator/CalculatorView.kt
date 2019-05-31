@@ -24,6 +24,7 @@ class CalculatorView {
     }
 
     companion object {
-        const val DECIMAL_PLACES_FOR_VIEW = 10
+        val DECIMAL_PLACES_FOR_VIEW =
+            RpnCalculatorCommandTool.getProperty("decimalPlacesForView", "10").toInt()
     }
 }

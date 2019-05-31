@@ -1,5 +1,6 @@
 package com.smore.rpncalculator.model
 
+import com.smore.rpncalculator.RpnCalculatorCommandTool
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -99,7 +100,8 @@ class NumberStack {
         }
 
         companion object {
-            private const val LIMIT_OF_VERSIONS = 20
+            private val LIMIT_OF_VERSIONS =
+                RpnCalculatorCommandTool.getProperty("limitOfHistoryVersion", "20").toInt()
         }
     }
 }

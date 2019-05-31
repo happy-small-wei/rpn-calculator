@@ -1,5 +1,6 @@
 package com.smore.rpncalculator.model
 
+import com.smore.rpncalculator.RpnCalculatorCommandTool
 import com.smore.rpncalculator.exception.DividedByZeroException
 import java.math.BigDecimal
 
@@ -45,7 +46,8 @@ class NumberNode(private val number: BigDecimal) {
     }
 
     companion object {
-        private const val DECIMAL_PLACES_FOR_SAVING = 15
+        private val DECIMAL_PLACES_FOR_SAVING =
+            RpnCalculatorCommandTool.getProperty("decimalPlacesForSave", "15").toInt()
         private const val ROUNDING_MODE = BigDecimal.ROUND_DOWN
     }
 }

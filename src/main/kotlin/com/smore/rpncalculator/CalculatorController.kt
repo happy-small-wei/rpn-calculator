@@ -3,19 +3,6 @@ package com.smore.rpncalculator
 import com.smore.rpncalculator.model.*
 import java.util.*
 
-fun main() {
-    val scanner = Scanner(System.`in`)
-    val calculator = CalculatorController()
-    val calculatorView = CalculatorView()
-    while (scanner.hasNextLine()) {
-        val inputLine = scanner.nextLine()
-        if (inputLine.isNotBlank()) {
-            calculator.processCommands(inputLine)
-                .apply(calculatorView::printResult)
-        }
-    }
-}
-
 class CalculatorController {
     private val calculator = CalculatorService()
 
@@ -43,6 +30,7 @@ class CalculatorController {
                 val commandName = input.substring(start, end)
                 Command(commandName.toLowerCase(), start)
                     .run(result::add)
+                start = end
             }
             start++
         }

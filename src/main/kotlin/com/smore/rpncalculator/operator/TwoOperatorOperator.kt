@@ -1,8 +1,8 @@
-package com.smore.rpncalculator.command
+package com.smore.rpncalculator.operator
 
-import com.smore.rpncalculator.*
+import com.smore.rpncalculator.model.*
 
-abstract class TwoOperatorCommand : Command() {
+abstract class TwoOperatorOperator : Operator() {
     override val numOfOperator = 2
 
     abstract fun calculateTwoOperator(firstNumber: NumberNode, secondNumber: NumberNode): NumberNode

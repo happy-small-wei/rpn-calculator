@@ -1,12 +1,11 @@
-package com.smore.rpncalculator.command
+package com.smore.rpncalculator.operator
 
-import com.smore.rpncalculator.*
 import com.smore.rpncalculator.exception.InsucientParametersException
+import com.smore.rpncalculator.model.NumberStack
 import javax.naming.InsufficientResourcesException
 
-abstract class Command {
+abstract class Operator {
     open val numOfOperator: Int = 0
-    open val shouldStoreAfterCommand = true
 
     @Throws(InsufficientResourcesException::class)
     fun operate(numberStack: NumberStack) {

@@ -1,4 +1,4 @@
-package com.smore.rpncalculator
+package com.smore.rpncalculator.model
 
 import com.smore.rpncalculator.exception.DividedByZeroException
 import java.math.BigDecimal
@@ -28,13 +28,16 @@ class NumberNode(private val number: BigDecimal) {
         if (otherNumber.number == BigDecimal.ZERO) {
             throw DividedByZeroException()
         }
-        val result = number.divide(otherNumber.number, DECIMAL_PLACES_FOR_SAVING, ROUNDING_MODE)
+        val result = number.divide(otherNumber.number,
+            DECIMAL_PLACES_FOR_SAVING,
+            ROUNDING_MODE)
         return NumberNode(result)
     }
 
     fun sqrt(): NumberNode {
         val result = BigDecimal.valueOf(Math.sqrt(number.toDouble()))
-        return NumberNode(result.setScale(DECIMAL_PLACES_FOR_SAVING, ROUNDING_MODE))
+        return NumberNode(result.setScale(DECIMAL_PLACES_FOR_SAVING,
+            ROUNDING_MODE))
     }
 
     fun toPlainString(decimalPlacesForView: Int): String {

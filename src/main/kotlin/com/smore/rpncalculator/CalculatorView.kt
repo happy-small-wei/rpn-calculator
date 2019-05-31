@@ -1,5 +1,6 @@
 package com.smore.rpncalculator
 
+import com.smore.rpncalculator.model.CalculatorResult
 import java.lang.StringBuilder
 
 class CalculatorView {

@@ -1,4 +1,4 @@
-package com.smore.rpncalculator
+package com.smore.rpncalculator.model
 
 import java.util.*
 import kotlin.collections.ArrayList

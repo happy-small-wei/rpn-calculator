@@ -5,4 +5,4 @@ import kotlin.annotation.AnnotationTarget.CLASS
 
 @Target(CLASS)
 @Retention(RUNTIME)
-annotation class Command(val commandName: String)
+annotation class Operator(val operatorName: String)

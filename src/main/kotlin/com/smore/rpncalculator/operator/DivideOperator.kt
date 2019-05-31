@@ -1,11 +1,11 @@
-package com.smore.rpncalculator.command
+package com.smore.rpncalculator.operator
 
-import com.smore.rpncalculator.NumberNode
-import com.smore.rpncalculator.annotation.Command
+import com.smore.rpncalculator.model.NumberNode
+import com.smore.rpncalculator.annotation.Operator
 import com.smore.rpncalculator.exception.DividedByZeroException
 
-@Command("/")
-class DivideCommand : TwoOperatorCommand() {
+@Operator("/")
+class DivideOperator : TwoOperatorOperator() {
     @Throws(DividedByZeroException::class)
     override fun calculateTwoOperator(firstNumber: NumberNode, secondNumber: NumberNode): NumberNode {
         return firstNumber.divide(secondNumber)

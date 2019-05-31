@@ -1,12 +1,7 @@
 package com.smore.rpncalculator
 
-import com.smore.rpncalculator.command.*
-import com.smore.rpncalculator.exception.*
-import com.sun.org.apache.bcel.internal.generic.PUSH
-import org.apache.commons.lang3.math.NumberUtils
-import org.reflections.Reflections
+import com.smore.rpncalculator.model.*
 import java.util.*
-import kotlin.reflect.KClass
 
 fun main() {
     val scanner = Scanner(System.`in`)
@@ -22,36 +17,22 @@ fun main() {
 }
 
 class CalculatorController {
-
-    private val numberStack = NumberStack()
-    private val commandMapping = getCommandMapping()
+    private val calculator = CalculatorService()
 
     fun processCommands(input: String): CalculatorResult {
-        val startPositionToCommand = getStartPositionToCommand(input)
-        var calculatorResult: CalculatorResult? = null
-        for ((startPosition, command) in startPositionToCommand) {
-            try {
-                execute(command)
-            } catch (e: CalculatorException) {
-                calculatorResult = CalculatorResult(numberStack.getNumbers(), e, command, startPosition)
+        val commands = getCommands(input)
+        var calculatorResult = CalculatorResult()
+        for (command in commands) {
+            calculatorResult = calculator.submit(command)
+            if (calculatorResult.exception != null) {
                 break
             }
         }
-        calculatorResult = calculatorResult ?: CalculatorResult(numberStack.getNumbers())
         return calculatorResult
     }
 
-    @Throws(CalculatorException::class)
-    private fun execute(command: String) {
-        if (isNumeric(command)) {
-            numberStack.pushNumber(command)
-        } else {
-            commandMapping.getOrDefault(command.toLowerCase(), DefaultCommand()).operate(numberStack)
-        }
-    }
-
-    private fun getStartPositionToCommand(input: String): SortedMap<Int, String> {
-        val result = TreeMap<Int, String>(Int::compareTo)
+    private fun getCommands(input: String): List<Command> {
+        val result = mutableListOf<Command>()
         var start = 0
         while (start < input.length) {
             if (!input[start].isWhitespace()) {
@@ -59,39 +40,12 @@ class CalculatorController {
                 while (end < input.length && !input[end].isWhitespace()) {
                     end++
                 }
-                result[start] = input.substring(start, end)
-                start = end
+                val commandName = input.substring(start, end)
+                Command(commandName.toLowerCase(), start)
+                    .run(result::add)
             }
             start++
         }
-        return result
-    }
-
-    private fun isNumeric(strNum: String): Boolean {
-        return NumberUtils.isCreatable(strNum)
-    }
-
-    companion object {
-        fun getCommandMapping(): Map<String, Command> {
-            val packageName = getPackageName(Command::class)
-            val commandClasses = getCommandClassesUnderPackage(packageName)
-            return commandClasses.associateBy(
-                keySelector = { clazz ->
-                    clazz.getAnnotation(com.smore.rpncalculator.annotation.Command::class.java).commandName
-                },
-                valueTransform = { clazz -> clazz.newInstance() }
-            )
-        }
-
-        private fun getCommandClassesUnderPackage(packageName: String): List<Class<out Command>> {
-            return Reflections(packageName)
-                .getSubTypesOf(Command::class.java)
-                .filter { clazz -> clazz.isAnnotationPresent(com.smore.rpncalculator.annotation.Command::class.java) }
-        }
-
-        private fun getPackageName(clazz: KClass<*>): String {
-            val qualifiedClassName = clazz.qualifiedName!!
-            return qualifiedClassName.substring(0, qualifiedClassName.lastIndexOf("."))
-        }
+        return result.toList()
     }
 }

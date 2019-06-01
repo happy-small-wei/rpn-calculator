@@ -27,7 +27,7 @@ class CalculatorController {
                     end++
                 }
                 val commandName = input.substring(start, end)
-                Command(commandName.toLowerCase(), start)
+                Command(commandName.toLowerCase(), start + 1)
                     .run(result::add)
                 start = end
             }

@@ -22,6 +22,14 @@ class CalculatorControllerTest {
         assert(numbers == "1 8")
     }
 
+    @Test(expected = InsucientParametersException::class)
+    fun noEnoughNumbersInStackTest() {
+        val result = CalculatorController().processCommands("1 2 * +")
+        assert(result.exception != null)
+        assert(result.commandPosition == 7)
+        result.exception?.apply { throw this }
+    }
+
     @Test fun processUndoCommandTest() {
         val result = CalculatorController().processCommands("1 2 3 4 sqrt * + + undo")
         assert(result.exception == null)

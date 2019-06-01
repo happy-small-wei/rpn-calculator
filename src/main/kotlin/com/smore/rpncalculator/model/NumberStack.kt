@@ -1,6 +1,7 @@
 package com.smore.rpncalculator.model
 
 import com.smore.rpncalculator.RpnCalculatorCommandTool
+import com.smore.rpncalculator.exception.PopFromEmptyStackException
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -17,11 +18,18 @@ class NumberStack {
         return stack.size
     }
 
+    @Throws(PopFromEmptyStackException::class)
     fun popNumber(): NumberNode {
+        if (stack.isEmpty()) {
+            throw PopFromEmptyStackException()
+        }
         return stack.pop()
     }
 
     fun pushNumber(numberNode: NumberNode) {
+        if (getSize() == LIMIT_OF_STACK_SIZE) {
+            stack.removeFirst()
+        }
         stack.push(numberNode)
         numberStackHistory.storeStack(stack)
     }
@@ -47,6 +55,10 @@ class NumberStack {
 
     fun loadPrevious() {
         numberStackHistory.revocerPrevious()
+        stack = numberStackHistory.getCurrentStack()
+    }
+
+    fun loadCurrent() {
         stack = numberStackHistory.getCurrentStack()
     }
 
@@ -101,7 +113,11 @@ class NumberStack {
 
         companion object {
             private val LIMIT_OF_VERSIONS =
-                RpnCalculatorCommandTool.getProperty("limitOfHistoryVersion", "20").toInt()
+                RpnCalculatorCommandTool.getProperty(propertyName = "limitOfHistoryVersion", default = "20").toInt()
         }
+    }
+    companion object {
+        private val LIMIT_OF_STACK_SIZE =
+            RpnCalculatorCommandTool.getProperty(propertyName = "limitOfStackSize", default = "20").toInt()
     }
 }

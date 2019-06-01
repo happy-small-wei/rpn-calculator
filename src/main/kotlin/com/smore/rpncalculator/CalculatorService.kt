@@ -18,7 +18,7 @@ class CalculatorService {
                 operatorMapping.getOrDefault(command.name, DefaultOperator()).operate(numberStack)
             }
             CalculatorResult(numberStack.getNumbers())
-        } catch (exception: Exception) {
+        } catch (exception: CalculatorException) {
             CalculatorResult(numberStack.getNumbers(), exception, command)
         }
     }

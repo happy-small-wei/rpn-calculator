@@ -5,6 +5,8 @@ import com.smore.rpncalculator.model.NumberStack
 @com.smore.rpncalculator.annotation.Operator("clear")
 class ClearOperator: Operator() {
     override fun execute(numberStack: NumberStack) {
-        numberStack.clear()
+        if (numberStack.getSize() != 0) {
+            numberStack.clear()
+        }
     }
 }

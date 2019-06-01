@@ -14,7 +14,8 @@ class CalculatorView {
         if (calculatorResult.exception != null) {
             result.append("operator ${calculatorResult.command} ")
                 .append("(position: ${calculatorResult.commandPosition}): ")
-                .append("${calculatorResult.getExceptionMessage()}").appendln()
+                .append("${calculatorResult.getExceptionMessage()}")
+                .append(":${calculatorResult.exception.cause?.message}").appendln()
         }
         result.append("stack:")
         calculatorResult.numbers.reversed().forEach { number ->

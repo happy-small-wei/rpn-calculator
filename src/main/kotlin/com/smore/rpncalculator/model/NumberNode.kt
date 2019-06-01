@@ -1,12 +1,17 @@
 package com.smore.rpncalculator.model
 
 import com.smore.rpncalculator.RpnCalculatorCommandTool
-import com.smore.rpncalculator.exception.DividedByZeroException
+import com.smore.rpncalculator.exception.*
 import java.math.BigDecimal
 
-class NumberNode(private val number: BigDecimal) {
+class NumberNode(number: BigDecimal) {
 
+    val number: BigDecimal
     var position: Int = -1
+
+    init {
+        this.number = number.setScale(DECIMAL_PLACES_FOR_SAVING, ROUNDING_MODE).stripTrailingZeros()
+    }
 
     constructor(number: String) : this(BigDecimal(number))
 
@@ -35,10 +40,13 @@ class NumberNode(private val number: BigDecimal) {
         return NumberNode(result)
     }
 
+    @Throws(NegativeForSqrtException::class)
     fun sqrt(): NumberNode {
+        if (number < BigDecimal.ZERO) {
+            throw NegativeForSqrtException()
+        }
         val result = BigDecimal.valueOf(Math.sqrt(number.toDouble()))
-        return NumberNode(result.setScale(DECIMAL_PLACES_FOR_SAVING,
-            ROUNDING_MODE))
+        return NumberNode(result)
     }
 
     fun toPlainString(decimalPlacesForView: Int): String {
@@ -46,8 +54,8 @@ class NumberNode(private val number: BigDecimal) {
     }
 
     companion object {
-        private val DECIMAL_PLACES_FOR_SAVING =
+        val DECIMAL_PLACES_FOR_SAVING =
             RpnCalculatorCommandTool.getProperty("decimalPlacesForSave", "15").toInt()
-        private const val ROUNDING_MODE = BigDecimal.ROUND_DOWN
+        const val ROUNDING_MODE = BigDecimal.ROUND_DOWN
     }
 }

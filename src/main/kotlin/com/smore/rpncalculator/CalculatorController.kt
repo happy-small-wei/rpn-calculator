@@ -1,7 +1,6 @@
 package com.smore.rpncalculator
 
 import com.smore.rpncalculator.model.*
-import java.util.*
 
 class CalculatorController {
     private val calculator = CalculatorService()

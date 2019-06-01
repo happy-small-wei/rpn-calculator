@@ -1,16 +1,16 @@
 package com.smore.rpncalculator.model
 
-import java.lang.Exception
+import com.smore.rpncalculator.exception.CalculatorException
 
 class CalculatorResult(val numbers: List<NumberNode>,
-                       val exception: Exception?,
+                       val exception: CalculatorException?,
                        val command: String,
                        val commandPosition: Int) {
 
     constructor(numbers: List<NumberNode>)
             : this(numbers, exception = null, command = "", commandPosition = -1)
 
-    constructor(numbers: List<NumberNode>, exception: Exception, command: Command)
+    constructor(numbers: List<NumberNode>, exception: CalculatorException, command: Command)
             : this(numbers, exception, command.name, command.position)
 
     constructor(): this(emptyList())

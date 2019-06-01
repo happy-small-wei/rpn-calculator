@@ -1,5 +1,6 @@
 package com.smore.rpncalculator.operator
 
+import com.smore.rpncalculator.exception.CalculatorException
 import com.smore.rpncalculator.model.*
 
 abstract class TwoOperatorOperator : Operator() {
@@ -7,6 +8,7 @@ abstract class TwoOperatorOperator : Operator() {
 
     abstract fun calculateTwoOperator(firstNumber: NumberNode, secondNumber: NumberNode): NumberNode
 
+    @Throws(CalculatorException::class)
     override fun execute(numberStack: NumberStack) {
         val newerNumber = numberStack.popNumber()
         val olderNumber = numberStack.popNumber()

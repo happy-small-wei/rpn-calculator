@@ -60,7 +60,7 @@ class CalculatorServiceTest {
     }
 
     @Test(expected = DividedByZeroException::class)
-    fun processDivideFailedTest() {
+    fun submitDivideFailedTest() {
         val service = CalculatorService().apply {
             listOf("1", "0").forEach { commandName ->
                 this.submit(Command(commandName))
@@ -75,7 +75,7 @@ class CalculatorServiceTest {
     }
 
     @Test(expected = NegativeForSqrtException::class)
-    fun processSqrtFailedTest() {
+    fun submitSqrtFailedTest() {
         val service = CalculatorService().apply {
             listOf("-1").forEach { commandName ->
                 this.submit(Command(commandName))

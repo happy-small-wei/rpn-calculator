@@ -1,7 +1,7 @@
 package com.smore.rpncalculator.operator
 
-import com.smore.rpncalculator.model.NumberNode
 import com.smore.rpncalculator.annotation.Operator
+import com.smore.rpncalculator.model.NumberNode
 
 @Operator("-")
 class SubtractOperator : TwoOperatorOperator() {

@@ -6,15 +6,14 @@ import com.smore.rpncalculator.model.NumberStack
 import com.smore.rpncalculator.operator.DivideOperator
 import org.junit.Test
 import java.math.BigDecimal
-import kotlin.math.exp
 
 class NumberStackTest {
     @Test fun pushAndPopTest() {
         val stack = NumberStack()
         stack.pushNumber("1")
         stack.pushNumber("2")
-        assert(stack.popNumber().toPlainString(CalculatorView.DECIMAL_PLACES_FOR_VIEW) == "2")
-        assert(stack.popNumber().toPlainString(CalculatorView.DECIMAL_PLACES_FOR_VIEW) == "1")
+        assert(stack.popNumber().toPlainString(CalculatorViewer.DECIMAL_PLACES_FOR_VIEW) == "2")
+        assert(stack.popNumber().toPlainString(CalculatorViewer.DECIMAL_PLACES_FOR_VIEW) == "1")
     }
 
     @Test fun pushToSizeLimitedStackTest() {

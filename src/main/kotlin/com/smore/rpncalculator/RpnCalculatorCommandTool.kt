@@ -3,14 +3,14 @@ package com.smore.rpncalculator
 import java.util.*
 
 fun main() {
-   RpnCalculatorCommandTool().start()
+    RpnCalculatorCommandTool().start()
 }
 
 class RpnCalculatorCommandTool {
     fun start() {
         val scanner = Scanner(System.`in`)
         val calculator = CalculatorController()
-        val calculatorView = CalculatorView()
+        val calculatorView = CalculatorViewer()
         while (scanner.hasNextLine()) {
             val inputLine = scanner.nextLine()
             if (inputLine.isNotBlank()) {

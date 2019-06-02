@@ -116,6 +116,7 @@ class NumberStack {
                 RpnCalculatorCommandTool.getProperty(propertyName = "limitOfHistoryVersion", default = "20").toInt()
         }
     }
+
     companion object {
         private val LIMIT_OF_STACK_SIZE =
             RpnCalculatorCommandTool.getProperty(propertyName = "limitOfStackSize", default = "20").toInt()

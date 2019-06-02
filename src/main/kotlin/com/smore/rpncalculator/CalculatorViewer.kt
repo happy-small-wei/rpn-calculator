@@ -1,9 +1,8 @@
 package com.smore.rpncalculator
 
 import com.smore.rpncalculator.model.CalculatorResult
-import java.lang.StringBuilder
 
-class CalculatorView {
+class CalculatorViewer {
     fun printResult(calculatorResult: CalculatorResult) {
         val view = viewCalculateResult(calculatorResult)
         println(view)

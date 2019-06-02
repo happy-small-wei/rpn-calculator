@@ -2,8 +2,6 @@ package com.smore.rpncalculator.operator
 
 import com.smore.rpncalculator.exception.*
 import com.smore.rpncalculator.model.NumberStack
-import java.lang.Exception
-import javax.naming.InsufficientResourcesException
 
 abstract class Operator {
     open val numOfOperator: Int = 0

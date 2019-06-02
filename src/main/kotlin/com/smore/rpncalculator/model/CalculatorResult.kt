@@ -13,7 +13,7 @@ class CalculatorResult(val numbers: List<NumberNode>,
     constructor(numbers: List<NumberNode>, exception: CalculatorException, command: Command)
             : this(numbers, exception, command.name, command.position)
 
-    constructor(): this(emptyList())
+    constructor() : this(emptyList())
 
     fun getExceptionMessage(): String? {
         return exception?.message

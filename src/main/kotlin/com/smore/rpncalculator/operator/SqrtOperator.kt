@@ -1,6 +1,6 @@
 package com.smore.rpncalculator.operator
 
-import com.smore.rpncalculator.exception.*
+import com.smore.rpncalculator.exception.NegativeForSqrtException
 import com.smore.rpncalculator.model.NumberStack
 
 @com.smore.rpncalculator.annotation.Operator("sqrt")

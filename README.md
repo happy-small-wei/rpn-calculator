@@ -10,7 +10,7 @@ An implimentation of RPN calculator as an exercise.
 Test reports can be find under <code> build/reports/test </code>
 
 ## Run
-1. Run by gradle directly.
+1Run by gradle directly.
     ```$xslt
     $ gradlew run --console=plain
     ```
@@ -35,6 +35,12 @@ Test reports can be find under <code> build/reports/test </code>
         stack: 6
         ```
         Other invalid calculation will also be reported such as <code>$ -1 sqrt</code>
-    - For **undo**, stack will turn to the state before the last command while for **redo** will turn to the state before **undo**. Invalid **redo** and **undo** will be ignored. 
+    - For **undo**, stack will turn to the state before the last command while for **redo** will turn to the state before **undo**. Invalid **redo** and **undo** will be ignored.
+        ```$xslt
+        $ 1 2 3 + undo
+        stack: 1 2 3
+        $ redo
+        stack: 1 5
+        ``` 
 ## Exit
 - Control + C
